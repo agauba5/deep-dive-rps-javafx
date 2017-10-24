@@ -52,8 +52,8 @@ public class Controller {
       @Override
       public void changed(ObservableValue<? extends Number> observable, Number oldValue,
           Number newValue) {
-        // TODO set mix value
-      }
+           terrain.setMix(newValue.intValue());
+          }
     });
     timer = new Timer(terrainView);
     terrain = new Terrain();

@@ -7,7 +7,7 @@ import javafx.scene.paint.Color;
 
 /**
  * View class for the Rock-Paper-Scissors cellular automaton (CA). This class implements the {@link
- * #(Canvas)} method to render an image of the RPS terrain, on a toroidal space, on which a
+ * #draw()} method to render an image of the RPS terrain, on a toroidal space, on which a
  * lattice is overlayed with agents of one of the 3 types at each of the lattice points.
  * <p>
  * As currently implemented, all of the drawing is done on the UI thread; delegating this

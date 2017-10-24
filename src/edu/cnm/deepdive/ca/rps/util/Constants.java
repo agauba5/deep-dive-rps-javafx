@@ -15,6 +15,6 @@ public class Constants {
   /** Default number of iterationsPerStep performed in each high-level step of the system. */
  public static final int DEFAULT_ITERATIONS_PER_STEP = 500;
   /** Default height and width of square lattice. */
-  public static final int DEFAULT_SIZE = 50;
+  public static final int DEFAULT_SIZE = 500;
   public static final int DEFAULT_MIX_RATE = 0;
 }

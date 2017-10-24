@@ -37,7 +37,6 @@ public class Terrain {
   private int steps;
   private long totalIterations;
   private int mix;
-  private int intermediate;
 
   /**
    * Create the lattice and initialize it by assigning a random instance of {@link Breed} to each
@@ -68,9 +67,9 @@ public class Terrain {
       for (int i = 0; i < getMix(); i++) {
         int[]firstPick = randomCell();
         int[]secondPick = randomCell();
-        intermediate = firstPick[i];
-        firstPick[i] = secondPick[i];
-        secondPick[i] = intermediate;
+        Breed intermediate = cells[firstPick[0]][firstPick[1]];
+        cells[firstPick[0]][firstPick[1]] = cells[secondPick[0]][secondPick[1]];
+        cells[secondPick[0]][secondPick[1]] = intermediate;
       }
     }
     for (int i = 0; i < iterationsPerStep; i++) {
