@@ -37,13 +37,13 @@ public class TerrainView extends Canvas {
               context.setFill(Color.RED);
               break;
             case PAPER:
-              context.setFill(Color.ORANGE);
+              context.setFill(Color.GREEN);
               break;
             case SCISSORS:
-              context.setFill(Color.YELLOW);
+              context.setFill(Color.BLUE);
               break;
           }
-          context.fillRect(
+          context.fillOval(
               j * cellSize, i * cellSize, cellSize, cellSize);
         }
       }

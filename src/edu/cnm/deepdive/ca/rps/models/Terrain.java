@@ -1,5 +1,6 @@
 package edu.cnm.deepdive.ca.rps.models;
 
+import edu.cnm.deepdive.ca.rps.util.Constants;
 import java.util.Random;
 
 /**
@@ -21,20 +22,22 @@ import java.util.Random;
  */
 public class Terrain {
 
-  /** Default height and width of square lattice. */
-  public static final int DEFAULT_SIZE = 50;
-  /** Default number of iterationsPerStep performed in each high-level step of the system. */
-  public static final int DEFAULT_ITERATIONS_PER_STEP = 500;
+
+
+
+
   /** Default neighborhood type used in selecting pairs of adjacent {@link Breed} instances. */
   public static final Neighborhood DEFAULT_NEIGHBORHOOD = Neighborhood.VON_NEUMANN;
 
   private Breed[][] cells = null;
   private Random rng = new Random();
-  private int size = DEFAULT_SIZE;
+  private int size = Constants.DEFAULT_SIZE;
   private Neighborhood neighborhood = DEFAULT_NEIGHBORHOOD;
-  private int iterationsPerStep = DEFAULT_ITERATIONS_PER_STEP;
+  private int iterationsPerStep = Constants.DEFAULT_ITERATIONS_PER_STEP;
   private int steps;
   private long totalIterations;
+  private int mix;
+  private int intermediate;
 
   /**
    * Create the lattice and initialize it by assigning a random instance of {@link Breed} to each
@@ -59,6 +62,16 @@ public class Terrain {
   public synchronized void step() {
     if (cells == null) {
       initialize();
+    }
+    // TODO mix
+    if(getMix() > Constants.DEFAULT_MIX_RATE) {
+      for (int i = 0; i < getMix(); i++) {
+        int[]firstPick = randomCell();
+        int[]secondPick = randomCell();
+        intermediate = firstPick[i];
+        firstPick[i] = secondPick[i];
+        secondPick[i] = intermediate;
+      }
     }
     for (int i = 0; i < iterationsPerStep; i++) {
       combat();
@@ -213,7 +226,7 @@ public class Terrain {
       {
         neighbors = new int[][]{
             {-1, -1}, {-1, 0}, {-1, 1},
-            { 0, -1},          { 0, 1},
+            {0, -1},          {0, 1},
             { 1, -1}, { 1, 0}, { 1, 1}
         };
       }
@@ -244,4 +257,11 @@ public class Terrain {
 
   }
 
+  public int getMix() {
+    return mix;
+  }
+
+  public void setMix(int mix) {
+    this.mix = mix;
+  }
 }
